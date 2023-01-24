@@ -3,26 +3,14 @@ import UserListItem from "./UserListItem";
 
 import "./UserList.css";
 
-// import ExpenseItem from "./ExpenseItem";
-type UserData = {
+type Username = {
   id: number;
-  avatar?: string;
   first_name: string;
   last_name: string;
-  email: string;
-  emailVerified: boolean;
-  dob: string;
-  company: Company;
-  skills: Array<string>;
-};
-
-type Company = {
-  name: string;
-  department: string;
 };
 
 type usernameProps = {
-  usernameList?: UserData[];
+  usernameList?: Username[];
 };
 
 const UserList = ({ usernameList }: usernameProps) => {
