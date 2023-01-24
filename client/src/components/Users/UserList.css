@@ -1,0 +1,21 @@
+.user-list-boundary {
+  padding: 1rem;
+  background-color: rgb(31, 31, 31);
+  margin: 2rem auto;
+  width: 50rem;
+  max-width: 95%;
+}
+
+.user-list-boundary h2 {
+  color: whitesmoke;
+}
+
+.user-list {
+  list-style: none;
+  padding: 0;
+}
+
+.user-list-empty {
+  color: white;
+  text-align: center;
+}
