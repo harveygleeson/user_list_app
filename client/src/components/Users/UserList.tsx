@@ -1,5 +1,6 @@
 import Card from "../UI/Card";
 import UserListItem from "./UserListItem";
+import { useNavigate } from "react-router-dom";
 
 import "./UserList.css";
 
@@ -14,6 +15,8 @@ type usernameProps = {
 };
 
 const UserList = ({ usernameList }: usernameProps) => {
+  const navigate = useNavigate();
+
   if (usernameList === null || usernameList?.length === 0) {
     return <h2 className="user-list-empty">Found no user data.</h2>;
   }
