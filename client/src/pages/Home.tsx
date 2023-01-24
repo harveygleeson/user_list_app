@@ -65,11 +65,7 @@ const Home = () => {
       });
   }, []);
 
-  return (
-    <div>
-      <UserList usernameList={users} />
-    </div>
-  );
+  return <UserList usernameList={users} />;
 };
 
 export default Home;
