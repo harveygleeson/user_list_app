@@ -1,31 +1,22 @@
 import Card from "../UI/Card";
 import UserListItem from "./UserListItem";
+import { useNavigate } from "react-router-dom";
 
 import "./UserList.css";
 
-// import ExpenseItem from "./ExpenseItem";
-type UserData = {
+type Username = {
   id: number;
-  avatar?: string;
   first_name: string;
   last_name: string;
-  email: string;
-  emailVerified: boolean;
-  dob: string;
-  company: Company;
-  skills: Array<string>;
-};
-
-type Company = {
-  name: string;
-  department: string;
 };
 
 type usernameProps = {
-  usernameList?: UserData[];
+  usernameList?: Username[];
 };
 
 const UserList = ({ usernameList }: usernameProps) => {
+  const navigate = useNavigate();
+
   if (usernameList === null || usernameList?.length === 0) {
     return <h2 className="user-list-empty">Found no user data.</h2>;
   }

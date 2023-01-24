@@ -36,28 +36,34 @@ import UserList from "../components/Users/UserList";
 //   },
 // ];
 
-type UserData = {
+// type UserData = {
+//   id: number;
+//   avatar?: string;
+//   first_name: string;
+//   last_name: string;
+//   email: string;
+//   emailVerified: boolean;
+//   dob: string;
+//   company: Company;
+//   skills: Array<string>;
+// };
+
+// type Company = {
+//   name: string;
+//   department: string;
+// };
+
+type Username = {
   id: number;
-  avatar?: string;
   first_name: string;
   last_name: string;
-  email: string;
-  emailVerified: boolean;
-  dob: string;
-  company: Company;
-  skills: Array<string>;
-};
-
-type Company = {
-  name: string;
-  department: string;
 };
 
 const Home = () => {
-  const [users, setUsers] = useState<UserData[] | undefined>();
+  const [users, setUsers] = useState<Username[] | undefined>();
 
   useEffect(() => {
-    fetch("http://localhost:8000/users")
+    fetch("http://localhost:8000/usernames")
       .then((response) => response.json())
       .then((json) => {
         setUsers(json);
@@ -65,11 +71,7 @@ const Home = () => {
       });
   }, []);
 
-  return (
-    <div>
-      <UserList usernameList={users} />
-    </div>
-  );
+  return <UserList usernameList={users} />;
 };
 
 export default Home;
