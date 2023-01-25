@@ -14,8 +14,12 @@ type usernameProps = {
 };
 
 const UserList = ({ usernameList }: usernameProps) => {
-  if (usernameList === null || usernameList?.length === 0) {
-    return <h2 className="user-list-empty">Found no user data.</h2>;
+  if (usernameList === undefined || usernameList?.length === 0) {
+    return (
+      <Card className="user-list-boundary">
+        <h2 className="user-list-empty">Found no user data.</h2>
+      </Card>
+    );
   }
 
   return (

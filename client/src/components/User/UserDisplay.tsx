@@ -3,6 +3,8 @@ import "./UserDisplay.css";
 import UserSubdisplay from "./UserSubdisplay";
 import UserCompany from "./UserCompany";
 import UserNameDetails from "./UserNameDetails";
+import Button from "../UI/Button";
+import { useNavigate } from "react-router-dom";
 
 type UserData = {
   id: number;
@@ -26,8 +28,11 @@ type UserDataProps = {
 };
 
 const UserDisplay = (props: UserDataProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card className="user-boundary">
+      <Button onClick={() => navigate("/users")}>Back to Users</Button>
       <h1>User:</h1>
       <UserNameDetails data={props.data} />
       <h1>Contact:</h1>

@@ -1,7 +1,7 @@
 import "./Card.css";
 import React from "react";
 
-interface cardProps {
+type cardProps = {
   className?: string;
   children: React.ReactNode;
 }
