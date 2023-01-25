@@ -38,16 +38,19 @@ const getData = (arr, id) => {
     const singleUserData = arr.find((x) => x.id === +id);
     return singleUserData;
 };
+// Read local data, all data stored in user_data
 (0, fs_1.readFile)("./data/user_data.json", "utf8", (err, data) => {
     if (err) {
         console.log(err);
     }
     user_data = JSON.parse(data);
 });
+// URL for usernames and ids
 app.get("/usernames", (req, res) => {
     usernames = getNames(user_data);
     res.send(usernames);
 });
+// URL for single user data by id
 app.get("/user/:id", (req, res) => {
     const userId = req.params.id;
     const userData = getData(user_data, userId);

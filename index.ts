@@ -18,13 +18,11 @@ type UserData = {
   email: string;
   emailVerified: boolean;
   dob: string;
-  company: Company;
+  company: {
+    name: string;
+    department: string;
+  };
   skills: Array<string>;
-};
-
-type Company = {
-  name: string;
-  department: string;
 };
 
 type Username = {
@@ -52,6 +50,7 @@ const getData = (arr: Array<UserData>, id: string) => {
   return singleUserData;
 };
 
+// Read local data, all data stored in user_data
 readFile("./data/user_data.json", "utf8", (err, data) => {
   if (err) {
     console.log(err);
@@ -59,11 +58,13 @@ readFile("./data/user_data.json", "utf8", (err, data) => {
   user_data = JSON.parse(data);
 });
 
+// URL for usernames and ids
 app.get("/usernames", (req: Request, res: Response) => {
   usernames = getNames(user_data);
   res.send(usernames);
 });
 
+// URL for single user data by id
 app.get("/user/:id", (req: Request, res: Response) => {
   const userId = req.params.id;
   const userData = getData(user_data, userId);
