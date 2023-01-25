@@ -27,7 +27,6 @@
 }
 
 .column-row {
-  display: flex;
   padding: 10px 5px;
 }
 
@@ -36,9 +35,11 @@
   flex: 1;
   margin: 0 1rem;
   color: white;
+  padding: 4px 0;
 }
 
 .user-item p {
+  padding: 4px 0;
   flex: 1;
   margin: 0 1rem;
   color: lightgray;
