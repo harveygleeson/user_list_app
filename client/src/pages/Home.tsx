@@ -21,7 +21,8 @@ const Home = () => {
         setUsers(json);
         setHomeIsLoading(false);
       })
-      .catch(() => {
+      .catch((e: Error) => {
+        console.log(e);
         setHomeIsLoading(false);
       });
   }, []);

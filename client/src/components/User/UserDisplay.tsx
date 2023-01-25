@@ -6,6 +6,10 @@ import UserNameDetails from "./UserNameDetails";
 import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
 
+type UserDataProps = {
+  data?: UserData;
+};
+
 type UserData = {
   id: number;
   avatar?: string;
@@ -14,32 +18,46 @@ type UserData = {
   email: string;
   emailVerified: boolean;
   dob: string;
-  company: Company;
+  company: {
+    name: string;
+    department: string;
+  };
   skills: Array<string>;
-};
-
-type Company = {
-  name: string;
-  department: string;
-};
-
-type UserDataProps = {
-  data?: UserData;
 };
 
 const UserDisplay = (props: UserDataProps) => {
   const navigate = useNavigate();
 
   return (
-    <Card className="user-boundary">
-      <Button onClick={() => navigate("/users")}>Back to Users</Button>
-      <h1>User:</h1>
-      <UserNameDetails data={props.data} />
-      <h1>Contact:</h1>
-      <UserSubdisplay data={props.data} />
-      <h1>Company:</h1>
-      <UserCompany data={props.data} />
-    </Card>
+    <div>
+      {props.data === undefined && (
+        <Card className="user-boundary">
+          <h1>No User Found</h1>
+        </Card>
+      )}
+      {props.data && (
+        <Card className="user-boundary">
+          <Button onClick={() => navigate("/users")}>Back to Users</Button>
+          <h1>User:</h1>
+          <UserNameDetails
+            first_name={props.data.first_name}
+            last_name={props.data.last_name}
+            avatar={props.data.avatar}
+          />
+          <h1>Contact:</h1>
+          <UserSubdisplay
+            email={props.data.email}
+            emailVerified={props.data.emailVerified}
+            dob={props.data.dob}
+          />
+          <h1>Company:</h1>
+          <UserCompany
+            name={props.data.company.name}
+            department={props.data.company.department}
+          />
+        </Card>
+      )}
+    </div>
   );
 };
 

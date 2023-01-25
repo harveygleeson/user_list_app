@@ -1,33 +1,19 @@
 import Card from "../UI/Card";
 import noImageLogo from "../../assets/No-image-found.jpeg";
 
-type UserData = {
-  id: number;
+type UsernameDetails = {
   avatar?: string;
   first_name: string;
   last_name: string;
-  email: string;
-  emailVerified: boolean;
-  dob: string;
-  company: Company;
-  skills: Array<string>;
 };
 
-type Company = {
-  name: string;
-  department: string;
-};
-
-type UserNameDetailProps = {
-  data?: UserData;
-};
-const UserNameDetails = (props: UserNameDetailProps) => {
+const UserNameDetails = (usernameDetails: UsernameDetails) => {
   return (
     <Card className="user-item">
-      {props.data?.avatar !== undefined ? (
+      {usernameDetails.avatar !== undefined ? (
         <img
           className="user-image"
-          src={props.data?.avatar}
+          src={usernameDetails.avatar}
           alt="User Profile "
         />
       ) : (
@@ -38,23 +24,9 @@ const UserNameDetails = (props: UserNameDetailProps) => {
         />
       )}
       <h2>
-        {props.data?.first_name} {props.data?.last_name}
+        {usernameDetails.first_name} {usernameDetails.last_name}
       </h2>
     </Card>
-    // <Card className="user-item">
-    //   <div className="column-container">
-    //     <div className="column-row">
-    //       <h2>Email:</h2>
-    //       <p>{props.data?.email}</p>
-    //       <h2>Verified:</h2>
-    //       <p>{props.data?.emailVerified ? "Yes" : "No"}</p>
-    //     </div>
-    //     <div className="column-row">
-    //       <h2>Date of Birth:</h2>
-    //       <p>{props.data?.dob}</p>
-    //     </div>
-    //   </div>
-    // </Card>
   );
 };
 
