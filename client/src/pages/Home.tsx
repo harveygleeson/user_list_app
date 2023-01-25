@@ -1,40 +1,29 @@
-import { useEffect, useState } from "react";
 import { BarLoader } from "react-spinners";
+import { useMachine } from "@xstate/react";
+import { useEffect } from "react";
 import UserList from "../components/Users/UserList";
+import { userStateMachine } from "../state/UserStateMachine";
 
 import "./Home.css";
 
-type Username = {
-  id: number;
-  first_name: string;
-  last_name: string;
-};
-
 const Home = () => {
-  const [users, setUsers] = useState<Username[] | undefined>();
-  const [homeIsLoading, setHomeIsLoading] = useState(true);
-
+  const [state, send] = useMachine(userStateMachine);
   useEffect(() => {
-    fetch("http://localhost:8000/usernames")
-      .then((response) => response.json())
-      .then((json) => {
-        setUsers(json);
-        setHomeIsLoading(false);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-        setHomeIsLoading(false);
-      });
-  }, []);
+    send("FETCH");
+  });
 
   return (
     <>
-      {homeIsLoading ? (
+      {state.matches("loading") && (
         <div className="loading-center">
           <BarLoader color="green" />
         </div>
-      ) : (
-        <UserList usernameList={users} />
+      )}
+      {state.matches("dataFound") && (
+        <UserList usernameList={state.context.userData} />
+      )}
+      {state.matches("noDataFound") && (
+        <UserList usernameList={state.context.userData} />
       )}
     </>
   );
