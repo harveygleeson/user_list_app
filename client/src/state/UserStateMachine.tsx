@@ -3,6 +3,9 @@ import { createMachine, assign } from "xstate";
 const fetchUsers = () =>
   fetch("http://localhost:8000/usernames").then((response) => response.json());
 
+const fetchUserData = (id: string) =>
+  fetch(`http://localhost:8000/user/${id}`).then((response) => response.json());
+
 export const userStateMachine = createMachine(
   {
     id: "user",
@@ -13,10 +16,10 @@ export const userStateMachine = createMachine(
     states: {
       idle: {
         on: {
-          FETCH: { target: "loading" },
+          FETCH: { target: "loadingUsernames" },
         },
       },
-      loading: {
+      loadingUsernames: {
         invoke: {
           src: (context, event) => fetchUsers(),
           onDone: {
@@ -35,12 +38,30 @@ export const userStateMachine = createMachine(
           fetchFailed: {},
         },
       },
-      dataFound: {},
+      dataFound: {
+        // on: {
+        //   FETCH: { target: "loadingUserData" },
+        // },
+      },
+      //   loadingUserData: {
+      //     invoke: {
+      //       src: (context, event) => fetchUserData("1"),
+      //       onDone: {
+      //         target: "dataFound",
+      //         actions: "assignUserData",
+      //       },
+      //       onError: {
+      //         cond: "fetchFailed",
+      //         target: "noDataFound.fetchFailed",
+      //         actions: "noUserDataFound",
+      //       },
+      //     },
+      //   },
     },
   },
   {
     actions: {
-      assignAction: assign({
+      assignUserData: assign({
         userData: (context, event: any) => {
           return event.data;
         },
