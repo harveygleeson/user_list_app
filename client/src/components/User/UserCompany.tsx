@@ -1,20 +1,9 @@
 import Card from "../UI/Card";
 
-// type UserData = {
-//   id: number;
-//   avatar?: string;
-//   first_name: string;
-//   last_name: string;
-//   email: string;
-//   emailVerified: boolean;
-//   dob: string;
-//   company: Company;
-//   skills: Array<string>;
-// };
-
 type Company = {
   name: string;
   department: string;
+  skills: Array<string>;
 };
 
 const UserCompany = (company: Company) => {
@@ -29,7 +18,14 @@ const UserCompany = (company: Company) => {
         </div>
         <div className="column-row">
           <h2>Skills:</h2>
-          <p>skills here</p>
+
+          <p>
+            {company.skills.map((skill) => {
+              if (skill !== company.skills[company.skills.length - 1])
+                return `${skill}, `;
+              return `${skill}.`;
+            })}
+          </p>
         </div>
       </div>
     </Card>

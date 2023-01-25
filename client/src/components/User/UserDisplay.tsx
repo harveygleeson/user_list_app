@@ -54,6 +54,7 @@ const UserDisplay = (props: UserDataProps) => {
           <UserCompany
             name={props.data.company.name}
             department={props.data.company.department}
+            skills={props.data.skills}
           />
         </Card>
       )}
