@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import UserDisplay from "../components/User/UserDisplay";
+import { getUserData } from "../services/apiServices";
 import "./Home.css";
 
 type UserData = {
@@ -24,17 +25,21 @@ const User = () => {
   const [userData, setUserData] = useState<UserData | undefined>();
   const [userIsLoading, setUserIsLoading] = useState(true);
 
+  const fetchUserData = async (id: string) => {
+    try {
+      const response = await getUserData(id);
+      setUserData(response);
+      setUserIsLoading(false);
+    } catch (error) {
+      console.log("Error:", error);
+      setUserIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetch(`http://localhost:8000/user/${id}`)
-      .then((response) => response.json())
-      .then((json) => {
-        setUserData(json);
-        setUserIsLoading(false);
-      })
-      .catch((e: Error) => {
-        console.log(e);
-        setUserIsLoading(false);
-      });
+    if (id) {
+      fetchUserData(id);
+    }
   }, []);
 
   return (

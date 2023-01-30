@@ -1,28 +1,11 @@
-export const getUserData = (
-  id: string,
-  setData: (json: JSON) => void,
-  setLoading: (state: boolean) => void
-) => {
-  fetch(`http://localhost:8000/user/${id}`)
-    .then((response) => response.json())
-    .then((json) => {
-      setData(json);
-      setLoading(false);
-    })
-    .catch((e: Error) => {
-      console.log(e);
-      setLoading(false);
-    });
+export const getUsernames = async () => {
+  const res = await fetch("http://localhost:8000/usernames");
+  const json = await res.json();
+  return json;
 };
 
-export const getUsernames = () => {
-  fetch("http://localhost:8000/usernames").then((response) => response.json());
-  //   .then((json) => {
-  //     setUsers(json);
-  //     setHomeIsLoading(false);
-  //   })
-  // .catch((e: Error) => {
-  //   console.log(e);
-  // //   setHomeIsLoading(false);
-  // });
+export const getUserData = async (id: string) => {
+  const res = await fetch(`http://localhost:8000/user/${id}`);
+  const json = await res.json();
+  return json;
 };
